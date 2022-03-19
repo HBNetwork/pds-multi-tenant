@@ -1,0 +1,1 @@
+web: gunicorn update_sem_where.wsgi --log-file -

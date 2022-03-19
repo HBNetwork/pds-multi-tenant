@@ -1,0 +1,15 @@
+ALLOWED_HOSTS=127.0.0.1, .localhost
+DATABASE_URL=postgres://update_sem_where:p4ssw0rd@localhost:5432/update_sem_where
+DEBUG=True
+SECRET_KEY=THIS_IS_NOT_A_GOOD_SECRET
+
+# Storage
+DEFAULT_FILE_STORAGE=django.core.files.storage.FileSystemStorage
+STATICFILES_STORAGE=django.contrib.staticfiles.storage.StaticFilesStorage
+
+# # AWS
+# AWS_ACCESS_KEY_ID=
+# AWS_SECRET_ACCESS_KEY=
+# AWS_STORAGE_BUCKET_NAME=
+# DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
+# STATICFILES_STORAGE=storages.backends.s3boto3.S3ManifestStaticStorage

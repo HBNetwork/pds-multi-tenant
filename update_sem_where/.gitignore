@@ -1,0 +1,11 @@
+### Django ###
+*.sqlite3
+staticfiles/
+
+
+### Python ###
+*.py[cod]
+
+# Environments
+.env
+.venv
