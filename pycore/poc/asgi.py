@@ -1,5 +1,5 @@
 """
-ASGI config for accounting_poc project.
+ASGI config for poc project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'accounting_poc.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'poc.settings')
 
 application = get_asgi_application()
