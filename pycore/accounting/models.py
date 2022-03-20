@@ -31,9 +31,9 @@ class Invoice(models.Model):
         ("payment_processed", "pagamento processado"),
         ("payment_in_process", "pagamento em processamento")
     )
-    value = models.DecimalField(decimal_places=2)
+    value = models.DecimalField(decimal_places=2, max_digits=5)
     due_date = models.DateField()
-    invoice_status = models.CharField(choices=STATUS, default=STATUS[0])
+    invoice_status = models.CharField(choices=STATUS, default=STATUS[0], max_length=100)
     vendor = models.ForeignKey(Vendor, related_name='invoices', on_delete=models.CASCADE)
     accounts_payable = models.ForeignKey(AccountsPayable, related_name='invoices', on_delete=models.CASCADE)
     accounts_receivable = models.ForeignKey(AccountsReceivable, related_name='invoices', on_delete=models.CASCADE)
