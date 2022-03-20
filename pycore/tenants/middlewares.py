@@ -2,7 +2,7 @@ import threading
 from uuid import uuid4
 
 from django.db import connections
-from utils import tenant_db_from_request
+from .utils import tenant_db_from_request
 
 THREAD_LOCAL = threading.local()
 
