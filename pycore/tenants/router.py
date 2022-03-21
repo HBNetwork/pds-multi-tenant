@@ -1,4 +1,4 @@
-from .middlewares import get_current_db_name
+from middlewares import get_current_db_name
 
 
 class TenantRouter:

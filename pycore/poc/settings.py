@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tenants.middlewares.TenantMiddleware',
 ]
 
 ROOT_URLCONF = 'poc.urls'
@@ -81,11 +82,22 @@ WSGI_APPLICATION = 'poc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+SQLITE_SERVICE_INSTANCE = 'django.db.backends.sqlite3'
+
 DATABASES = {
-    'default': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'default.sqlite3',},
-    'thor': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'},
-    'potter': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'},
+    'default': {
+        'ENGINE': SQLITE_SERVICE_INSTANCE,
+        'NAME': BASE_DIR / 'default.sqlite3',
+    },
+    'thor': {
+        'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'
+    },
+    'potter': {
+        'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'
+    },
 }
+
+DATABASE_ROUTERS = ['tenants.router.TenantRouter']
 
 
 # Password validation
@@ -93,16 +105,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
