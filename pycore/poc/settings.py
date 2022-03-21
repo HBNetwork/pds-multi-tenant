@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
-    "127.0.0.1"
+    "127.0.0.1",
+    "poc.local",
+    ".poc.local"
 ]
 
 
@@ -83,9 +85,9 @@ WSGI_APPLICATION = 'poc.wsgi.application'
 SQLITE_SERVICE_INSTANCE = 'django.db.backends.sqlite3'
 
 DATABASES = {
-    'default': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'db.sqlite3',},
-    'thor': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.db'},
-    'potter': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.db'},
+    'default': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'default.sqlite3',},
+    'thor': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'},
+    'potter': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'},
 }
 
 DATABASE_ROUTERS = ['tenants.router.TenantRouter']

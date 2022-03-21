@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from accounting.models import Invoice, Vendor
+
+@admin.register(Vendor)
+class VendorAdmin(admin.ModelAdmin):
+    fields = ["cnpj", "corporate_name"]
+
+admin.site.register(Invoice)
