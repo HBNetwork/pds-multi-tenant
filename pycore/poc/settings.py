@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-dfx$saiw@h^^1$goip3+7^&%tdp*u=nnz76!0u(+qy@lrgp%l*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "poc.local",
+    ".poc.local"
+]
 
 
 # Application definition
@@ -37,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'tenants',
+    'accounting'
 ]
 
 MIDDLEWARE = [
@@ -74,10 +82,9 @@ WSGI_APPLICATION = 'poc.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'default.sqlite3',},
+    'thor': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'},
+    'potter': {'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'},
 }
 
 
