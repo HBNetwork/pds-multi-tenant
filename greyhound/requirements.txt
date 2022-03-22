@@ -1,0 +1,12 @@
+asgiref==3.5.0
+attrs==21.4.0
+Django==4.0.3
+iniconfig==1.1.1
+packaging==21.3
+pluggy==1.0.0
+py==1.11.0
+pyparsing==3.0.7
+pytest==7.1.1
+pytest-django==4.5.2
+sqlparse==0.4.2
+tomli==2.0.1
