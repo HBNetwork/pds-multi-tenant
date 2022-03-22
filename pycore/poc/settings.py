@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,18 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dfx$saiw@h^^1$goip3+7^&%tdp*u=nnz76!0u(+qy@lrgp%l*'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "poc.local",
-    ".poc.local"
+    "localhost", "127.0.0.1", "poc.local", ".poc.local"
 ]
-
 
 # Application definition
 
@@ -78,27 +77,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'poc.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-SQLITE_SERVICE_INSTANCE = 'django.db.backends.sqlite3'
+default_dburl = "sqlite:///" + os.path.join(BASE_DIR, "default.sqlite3")
+thor_dburl = "sqlite:///" + os.path.join(BASE_DIR, "thor.sqlite3")
+potter_dburl = "sqlite:///" + os.path.join(BASE_DIR, "potter.sqlite3")
 
 DATABASES = {
-    'default': {
-        'ENGINE': SQLITE_SERVICE_INSTANCE,
-        'NAME': BASE_DIR / 'default.sqlite3',
-    },
-    'thor': {
-        'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'
-    },
-    'potter': {
-        'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'
-    },
+    "default": config("DATABASE_URL", default=default_dburl, cast=dburl),
+    "thor": config("DATABASE_URL", default=thor_dburl, cast=dburl),
+    "potter": config("DATABASE_URL", default=potter_dburl, cast=dburl),
 }
 
-DATABASE_ROUTERS = ['tenants.router.TenantRouter']
+# SQLITE_SERVICE_INSTANCE = 'django.db.backends.sqlite3'
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': SQLITE_SERVICE_INSTANCE,
+#         'NAME': BASE_DIR / 'default.sqlite3',
+#     },
+#     'thor': {
+#         'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'thor.sqlite3'
+#     },
+#     'potter': {
+#         'ENGINE': SQLITE_SERVICE_INSTANCE, 'NAME': BASE_DIR / 'potter.sqlite3'
+#     },
+# }
 
+DATABASE_ROUTERS = ['tenants.router.TenantRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -118,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -129,7 +135,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
