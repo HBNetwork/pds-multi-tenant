@@ -27,9 +27,9 @@ python manage.py runserver
 
 - [X] Extrair tenant_name do ínicio da URL
 - [X] Criar exceção para /admin/
-- [ ] Tratar URLs sem barra
+- [X] Tratar URLs sem barra
+- [X] Testes
 - [ ] Criar model de tenants
-- [ ] Testes
 - [ ] Criar models da aplicação
 
 # Dúvidas
