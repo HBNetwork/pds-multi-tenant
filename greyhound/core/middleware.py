@@ -1,23 +1,52 @@
+import re
+
+from django.conf import settings
+from django.http import Http404
+
+
+class NoTenant(Exception):
+    ...
+
+
+def split_tenant(path):
+    if (match := re.search(r'/(.*?)(/.*)', path)):
+        return match.groups()
+    elif (match := re.search(r'/(.*)', path)):
+        if (tenant := match.group(1)):
+            return tenant, ''
+    raise NoTenant(f'No tenant in {path}')
+
+
+def tenant_available(tenant_name):
+    return tenant_name in settings.TENANTS
+
+
+def tenant_exempt(tenant_name):
+    return tenant_name in settings.TENANTS_EXEMPT
+
+
 class TenantMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
-        # One-time configuration and initialization.
-
 
     def __call__(self, request):
-        # Code to be executed for each request before
-        # the view (and later middleware) are called.
-        if not request.path_info.startswith('/admin/'):
-            index = request.path_info.find('/', 1)
+        tenant_name, path = self.get_tenant_from_url(request.path_info)
 
-            tenant_name = request.path_info[1:index]
+        if not tenant_exempt(tenant_name):
+            self.check_tenant(tenant_name)
             request.tenant_name = tenant_name
+            request.path_info = path
 
-            request.path_info = request.path_info[index:]
+        return self.get_response(request)
 
-        response = self.get_response(request)
+    @staticmethod
+    def get_tenant_from_url(path):
+        try:
+            return split_tenant(path)
+        except NoTenant:
+            raise Http404()
 
-        # Code to be executed for each request/response after
-        # the view is called.
-
-        return response
+    @staticmethod
+    def check_tenant(tenant_name):
+        if not tenant_available(tenant_name):
+            raise Http404()
