@@ -75,12 +75,22 @@ WSGI_APPLICATION = 'indexOutOfBound.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+class Database(dict):
+    cache = {}
+
+    def __getitem__(self, item):
+        if item not in self.cache:
+            self.cache[item] = {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': str(BASE_DIR / f'{item}.db.sqlite3'),
+            }
+        return self.cache[item]
+
+    def __contains__(self, item):
+        return True
+
+
+DATABASES = Database()
 
 DATABASE_ROUTERS = ['core.dbrouter.TenantRouter']
 
