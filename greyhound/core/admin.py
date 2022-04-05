@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Tenant
+
+
+@admin.register(Tenant)
+class TenantAdmin(admin.ModelAdmin):
+    pass

@@ -1,3 +1,5 @@
 <h1>Balanço</h1>
 
 <p>Tenant: {{ request.tenant_name }}</p>
+
+<a href="/{{ request.tenant_name }}{% url 'saldo' %}">Saldo</a>

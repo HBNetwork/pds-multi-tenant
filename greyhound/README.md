@@ -29,8 +29,15 @@ python manage.py runserver
 - [X] Criar exceção para /admin/
 - [X] Tratar URLs sem barra
 - [X] Testes
-- [ ] Criar model de tenants
-- [ ] Criar models da aplicação
+- [X] Criar model de tenants
+- [X] Criar models da aplicação
+- [ ] Criar test para o TenantMiddleware
+- [ ] Criar um app isolado com as funcionalidades multi-tenant
+- [ ] Tratar na criação de tenants as exceções (exempt? boolean no tenant model?)
+- [ ] Resolver url resolve sem tenant. Criar um template tag?
+- [ ] Como tratar a url /? Criar namespace t/?
+- [ ] Definar como os usuários se relacionarão com os tenants
+
 
 # Dúvidas
 
