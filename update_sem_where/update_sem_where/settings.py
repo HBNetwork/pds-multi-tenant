@@ -33,6 +33,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'update_sem_where.core.middlewares.TenantMiddleware',
 ]
 
 ROOT_URLCONF = 'update_sem_where.urls'

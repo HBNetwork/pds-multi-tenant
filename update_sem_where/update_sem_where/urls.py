@@ -21,4 +21,5 @@ from update_sem_where.core.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('<tenant>/', index)
 ]

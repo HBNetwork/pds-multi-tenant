@@ -26,6 +26,8 @@ python manage.py runserver
 
 
 ## Próximos passos
+- middleware que seta no thread.Local
+- DatabaseRouter que lê do thread.Local
 - Command para criar novos tenants/schemas
   1. criar schema com `tenants.create`
   2. rodar migrations nesse novo schema para criar tabelas

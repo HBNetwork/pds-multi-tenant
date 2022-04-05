@@ -39,3 +39,9 @@ def test_list_tenants_with_href(client):
 
     assert 'href="/tenant3"' in str(response.content)
     assert 'href="/tenant4"' in str(response.content)
+
+
+@pytest.mark.django_db
+def test_get_tenant(client):
+    response = client.get('/tenant1', follow=True)
+    assert 'Hello World, tenant1' in str(response.content)
