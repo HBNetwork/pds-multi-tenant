@@ -18,3 +18,8 @@ def create(name):
 
 def list():
     return Schema.objects.tenants()
+
+
+def from_path(path):
+    _, tenant, *_ = path.split('/')
+    return tenant

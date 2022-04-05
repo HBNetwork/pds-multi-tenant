@@ -49,3 +49,10 @@ def test_create_duplicated_raises_exception():
         tenants.create(tenant)
 
     assert str(error.value) == f'schema "{tenant}" already exists\n'
+
+
+def test_from_path(rf):
+    assert tenants.from_path('/tenant1/') == 'tenant1'
+    assert tenants.from_path('/passaporte/') == 'passaporte'
+    assert tenants.from_path('/passaporte2') == 'passaporte2'
+    assert tenants.from_path('/tenant2/whatever') == 'tenant2'
