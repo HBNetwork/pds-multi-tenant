@@ -41,6 +41,8 @@ python manage.py runserver
 
 # Dúvidas
 
+- Por que funcionou com getattr com o manager errado? (AttributeError: '_thread._local' objects has no attribute 'tenant_id'
+
 - A aplicação deve ficar responsável pelo "rewrite" da url?
 - MiddlewareMixin deprecated, como lidar com process_request?
 - Ordem dos middlewares influência? Onde colocar?

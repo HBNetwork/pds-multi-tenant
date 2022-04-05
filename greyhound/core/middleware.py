@@ -33,6 +33,7 @@ def tenant_exempt(tenant_name):
 
 
 def current_tenant_name():
+    # return getattr(threadlocal, 'tenant_id', None)
     try:
         return threadlocal.tenant_id
     except Exception as e:
