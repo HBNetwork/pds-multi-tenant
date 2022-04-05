@@ -26,7 +26,6 @@ python manage.py runserver
 
 
 ## Próximos passos
-- Home listar os tenants usando a função `tenants.list` com link para `/<tenant_name>/`
 - Command para criar novos tenants/schemas
   1. criar schema com `tenants.create`
   2. rodar migrations nesse novo schema para criar tabelas
