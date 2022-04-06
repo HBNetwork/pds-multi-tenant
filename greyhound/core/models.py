@@ -10,7 +10,7 @@ class Tenant(models.Model):
         return self.slug
 
 
-class TenantAwareModelMixin(models.Model):
+class TenantAwareModel(models.Model):
     tenant = models.ForeignKey("core.Tenant", models.CASCADE)
 
     objects = TenantAwareManager()
@@ -20,7 +20,7 @@ class TenantAwareModelMixin(models.Model):
         abstract = True
 
 
-class Operacao(TenantAwareModelMixin):
+class Operacao(TenantAwareModel):
     descricao = models.CharField(max_length=100)
     valor = models.DecimalField(max_digits=11, decimal_places=2)
 
