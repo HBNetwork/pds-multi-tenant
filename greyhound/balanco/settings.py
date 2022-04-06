@@ -125,6 +125,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom Configurations
-TENANTS = ['tenant1', 'tenant2']
-
-TENANTS_EXEMPT = ['admin']
+# TENANTS_EXEMPT = [
+#     'admin',
+# ]

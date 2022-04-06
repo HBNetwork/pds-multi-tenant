@@ -29,11 +29,20 @@ python manage.py runserver
 - [X] Criar exceção para /admin/
 - [X] Tratar URLs sem barra
 - [X] Testes
-- [ ] Criar model de tenants
-- [ ] Criar models da aplicação
+- [X] Criar model de tenants
+- [X] Criar models da aplicação
+- [ ] Resolver url resolve sem tenant. Criar um template tag?
+- [ ] Criar test para o TenantMiddleware
+- [ ] Criar um app isolado com as funcionalidades multi-tenant
+- [ ] Tratar na criação de tenants as exceções (exempt? boolean no tenant model?)
+- [ ] Como tratar a url /? Criar namespace t/?
+- [ ] Definar como os usuários se relacionarão com os tenants
+
 
 # Dúvidas
 
+- O threadlocal está sendo compartilhado entre todos os testes do pytest, como resolver (por enquanto reodenamos os testes)?
+  Temos esse risco num application server?
 - A aplicação deve ficar responsável pelo "rewrite" da url?
 - MiddlewareMixin deprecated, como lidar com process_request?
 - Ordem dos middlewares influência? Onde colocar?
