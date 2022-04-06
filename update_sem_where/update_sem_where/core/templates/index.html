@@ -5,6 +5,11 @@
   <title></title>
 </head>
 <body>
-  <h1>Hello World</h1>
+  <h1>Hello World, {{ tenant }}</h1>
+  <ul>
+    {% for tenant in tenants %}
+    <li><a href="/{{ tenant }}">{{ tenant }}</a></li>
+    {% endfor %}
+  </ul>
 </body>
 </html>

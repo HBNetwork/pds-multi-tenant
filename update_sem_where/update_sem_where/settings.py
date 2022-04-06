@@ -3,6 +3,8 @@ from pathlib import Path
 from decouple import Csv, config
 from dj_database_url import parse as dburl
 
+from update_sem_where.core.database import DatabaseMapper
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
@@ -33,6 +35,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'update_sem_where.core.middlewares.TenantMiddleware',
 ]
 
 ROOT_URLCONF = 'update_sem_where.urls'
@@ -57,9 +60,8 @@ WSGI_APPLICATION = 'update_sem_where.wsgi.application'
 
 
 # Database
-DATABASES = {
-    'default': config('DATABASE_URL', cast=dburl),
-}
+DATABASES = DatabaseMapper(config('DATABASE_URL', cast=dburl))
+DATABASE_ROUTERS = ['update_sem_where.core.database.DatabaseRouter']
 
 
 # Password validation

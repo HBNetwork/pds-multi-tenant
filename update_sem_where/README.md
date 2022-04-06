@@ -25,8 +25,25 @@ python manage.py runserver
 ```
 
 
+## Fluxo
+1. Chega a request
+1. TenantMiddleware seta tenant na thread.Local
+1. DatabaseRouter escolhe o banco de acordo com o tenant que está no thread.local
+1. Django busca esse banco no settings.DATABASES que é o custom DatabaseMapper
+1. DatabaseMapper retorna o banco com o usuário do tenant
+
+
 ## Próximos passos
-- Home listar os tenants usando a função `tenants.list` com link para `/<tenant_name>/`
+- Criar usuário do banco quando cria um tenant
+  - new create:
+  ```
+  def create(name):
+      create_schema(name)
+      create_user(name)
+      # rodar migrate no novo schema
+  ```
+- criar url /<tenant>/admin
+- fix tenant favicon.ico
 - Command para criar novos tenants/schemas
   1. criar schema com `tenants.create`
   2. rodar migrations nesse novo schema para criar tabelas
