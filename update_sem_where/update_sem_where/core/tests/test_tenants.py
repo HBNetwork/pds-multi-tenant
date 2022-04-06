@@ -51,6 +51,20 @@ def test_create_duplicated_raises_exception():
     assert str(error.value) == f'schema "{tenant}" already exists\n'
 
 
+@pytest.mark.django_db
+def test_create_user():
+    tenant = 'tenant'
+
+    tenants.create(tenant)
+    tenants.create_user(tenant)
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT usename AS role_name FROM pg_catalog.pg_user;")
+        users = cursor.fetchall()
+
+    assert any(u[0] == tenant for u in users)
+
+
 def test_from_path(rf):
     assert tenants.from_path('/tenant1/') == 'tenant1'
     assert tenants.from_path('/passaporte/') == 'passaporte'

@@ -34,8 +34,16 @@ python manage.py runserver
 
 
 ## Próximos passos
-- DatabaseRouter que lê do thread.Local
 - Criar usuário do banco quando cria um tenant
+  - new create:
+  ```
+  def create(name):
+      create_schema(name)
+      create_user(name)
+      # rodar migrate no novo schema
+  ```
+- criar url /<tenant>/admin
+- fix tenant favicon.ico
 - Command para criar novos tenants/schemas
   1. criar schema com `tenants.create`
   2. rodar migrations nesse novo schema para criar tabelas
