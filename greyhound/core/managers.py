@@ -26,8 +26,8 @@ class TenantAwareQuerySet(models.QuerySet):
 
         super().bulk_create(objs, batch_size, ignore_conflicts)
 
-    def as_manager(cls):
-        manager = TenantAwareManager.from_queryset(cls)()
+    def as_manager(self):
+        manager = TenantAwareManager.from_queryset(self)()
         manager._built_with_as_manager = True
         return manager
 
