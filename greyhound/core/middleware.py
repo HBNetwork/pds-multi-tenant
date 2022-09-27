@@ -16,15 +16,17 @@ def split_tenant(path):
     if (match := re.search(r'/(.*?)(/.*)', path)):
         return match.groups()
     elif (match := re.search(r'/(.*)', path)):
-        if (tenant := match.group(1)):
+        if tenant := match[1]:
             return tenant, ''
     raise NoTenant(f'No tenant in {path}')
 
 
 def tenant_exempt(tenant_name):
-    if not hasattr(settings, 'TENANTS_EXEMPT'):
-        return False
-    return tenant_name in settings.TENANTS_EXEMPT
+    return (
+        tenant_name in settings.TENANTS_EXEMPT
+        if hasattr(settings, 'TENANTS_EXEMPT')
+        else False
+    )
 
 
 def current_tenant():

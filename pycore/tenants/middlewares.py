@@ -14,8 +14,7 @@ class TenantMiddleware:
     def __call__(self, request):
         db = tenant_db_from_request(request)
         setattr(THREAD_LOCAL, "DB", db)
-        response = self.get_response(request)
-        return response
+        return self.get_response(request)
 
 
 def get_current_db_name():
